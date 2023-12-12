@@ -6,19 +6,25 @@ y=[]
 i=1
 while(manu!=6):
     if(manu==1):
+
         x=input("Enter name: ")
         if x.isalpha() :
-            print()
+            if x in phoneDirectory:
+                print("Already exists")
+            else:
+                y=(input("Enter your 10-digit phone number:"))
+                if len(y)==10 and y.isnumeric():
+                    phoneDirectory[x]=y
+                    
+                    phoneDirectory.update({x:y})
+                    print("Record added",phoneDirectory)
+                elif x in phoneDirectory:      
+                    print("already exists")
+                else:
+                    print("error")
         else:
             print("error")
-
-        y=(input("Enter your 10-digit phone number:"))
-        if len(y)==10 and y.isnumeric():
-            phoneDirectory[x]=y
-            phoneDirectory.update({x:y})
-            print("Record added",phoneDirectory)
-        else:
-            print("error")
+        
         
     elif(manu==2):
         b=input("Enter the name that you want to search: ")
@@ -27,17 +33,24 @@ while(manu!=6):
         else:
             print("No name exist in phonedirectory. ") 
     elif(manu==3):
-        c=input("Enter the name you want to update: ")  
-        d=input("Enter your 10-digit phone number want to update: ") 
-        phoneDirectory.update({c:d})  
-        print(phoneDirectory)
+        c=input("Enter the name you want to update: ") 
+        if c.isalpha(): 
+            d=input("Enter your 10-digit phone number want to update: ")
+            if len(y)==10 and y.isnumeric():
+                phoneDirectory[x]=y
+                phoneDirectory.update({c:d})  
+                print(phoneDirectory)
+            else:
+                print("error")
+        else:
+            print("error")
     elif(manu==4):
-        sorted_phonedirectory=dict(sorted(phoneDirectory.items()))
+        sorted_phonedirectory=(sorted(phoneDirectory.items()))
         print("sorted records",sorted_phonedirectory)
     elif(manu==5):
-        c=input("Enter the name that you want to delete:")
-        if c in phoneDirectory:
-                phoneDirectory.pop(c)
+        e=input("Enter the name that you want to delete:")
+        if e in phoneDirectory:
+                phoneDirectory.pop(e)
                 print("Record deleted")
         elif len(phoneDirectory) ==0:
             print("phonedirectory is empty,no name is found" )
